@@ -7,11 +7,13 @@ int suma(int [],int);
 float media(int [],int);
 int maximo(int [],int);
 int minimo(int [],int);
-
+void leevec(int [], int n);
 
 int main()
 {
-    int n, p, a, r, u;
+
+    int n, p, a, r, u, o;
+    int Vec[10];
     do{
         cout << "1. Factorial" << endl;
         cout << "2.  cálculo de la potencia an para cualquier real a y para cualquier entero n " << endl;
@@ -40,25 +42,29 @@ int main()
             }
             case 3:
             {
+                cout<<"Introduce el numero de valores incluidos en el vector"<<endl;
+                cin>>o;
+                leevec(Vec, o);
                 cout << "1. Suma" << endl;
-                cout << "2. " << endl;
-                cout << "3. " << endl;
+                cout << "2. Media" << endl;
+                cout << "3. Maximo y minimo" << endl;
                 cout << "4. Salir" << endl;
                 cin >> u;
                 switch (u) {
                     case 1:
                     {
+                        cout<<suma(Vec, o)<<endl;
 
                         break;
                     }
                     case 2:
                     {
-
+                        cout<<"La media es: "<<media(Vec, o)<<endl;
                         break;
                     }
                     case 3:
                     {
-
+                        cout<<"El maximo es: "<<maximo(Vec, o)<<" y el minimo: "<<minimo(Vec,o)<<endl;
                         break;
                     }
                     case 4: {
@@ -85,7 +91,9 @@ int main()
     } while (n != 4);
 
 	return 0;
+
 }
+
 
 
 
@@ -139,7 +147,8 @@ int suma(int v[],int n){
     if (n==0){
         return sum;
     }else {
-        return sum=v[n]+ suma(v, n-1);
+        sum=v[n-1]+ suma(v, n-1);
+        return sum;
     }
 }
 
@@ -150,6 +159,13 @@ int suma(int v[],int n){
 {Post: }
 */
 float media(int v[],int n){
+    float media=0.0;
+    if (n==0){
+        return media;
+    }else {
+        media= suma(v, n)/n;
+        return media;
+    }
 
 }
 
@@ -159,6 +175,17 @@ float media(int v[],int n){
 {Post: }
 */
 int maximo(int v[],int n){
+    int max;
+    if (n==0){
+        return max=0;
+    }else {
+        if (v[n-1]> maximo(v, n-1)){
+            max=v[n-1];
+        }else{
+            max= maximo(v, n-1);
+        }
+        return max;
+    }
 
 }
 
@@ -168,9 +195,28 @@ int maximo(int v[],int n){
 {Post: }
 */
 int minimo(int v[],int n){
-
+    int min;
+    if(n==0){
+        return min=0;
+    }else {
+        if((v[n-1]< minimo(v,n-1))||(minimo(v,n-1)==0)){
+            min=v[n-1];
+        }else{
+            min= minimo(v,n-1);
+        }
+        return min;
+    }
 }
 
+void leevec(int v[], int n){
+    int i=0;
+
+    while (i<n){
+        cout<<"Introduce el "<<i+1<<" valor del vector"<<endl;
+        cin>>v[i];
+        i++;
+    }
+}
 
 
 
